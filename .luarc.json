@@ -1,0 +1,19 @@
+{
+  "runtime": {
+    "version": "LuaJIT",
+    "path": ["?.lua", "?/init.lua"]
+  },
+  "workspace": {
+    "library": [
+      "${3rd}/luv/library",
+      "${3rd}/busted/library"
+    ],
+    "checkThirdParty": false
+  },
+  "diagnostics": {
+    "globals": ["vim"]
+  },
+  "type": {
+    "castNumber": true
+  }
+}

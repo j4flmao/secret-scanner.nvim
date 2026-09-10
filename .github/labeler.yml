@@ -1,0 +1,27 @@
+core:
+  - changed-files:
+      - any-glob-to-any-file: lua/secret-scanner/**
+
+tests:
+  - changed-files:
+      - any-glob-to-any-file: tests/**
+
+docs:
+  - changed-files:
+      - any-glob-to-any-file:
+          - README.md
+          - CONTRIBUTING.md
+          - CHANGELOG.md
+          - doc/**
+
+examples:
+  - changed-files:
+      - any-glob-to-any-file: examples/**
+
+ci:
+  - changed-files:
+      - any-glob-to-any-file:
+          - .github/**
+          - Makefile
+          - .stylua.toml
+          - .luacheckrc

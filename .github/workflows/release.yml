@@ -1,0 +1,68 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Create GitHub Release (${{ github.ref_name }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate tag matches CHANGELOG and project version markers
+        run: |
+          VERSION="${GITHUB_REF_NAME#v}"
+          python - "$VERSION" <<'PY'
+          import re, sys
+          version = sys.argv[1]
+          text = open("CHANGELOG.md", encoding="utf-8").read()
+          # CHANGELOG should contain an `## [<version>]` section.
+          if not re.search(r"^## \[" + re.escape(version) + r"\]", text, re.M):
+              sys.exit(f"CHANGELOG.md has no section for version {version}")
+          print("tag", version, "matches CHANGELOG")
+          PY
+
+      - name: Extract release notes for this version
+        run: |
+          python - "${GITHUB_REF_NAME#v}" <<'PY'
+          import re, sys
+          version = sys.argv[1]
+          text = open("CHANGELOG.md", encoding="utf-8").read()
+          lines = text.splitlines()
+          out, capture = [], False
+          for line in lines:
+              if re.match(r"^## \[", line):
+                  if capture:
+                      break
+                  if line.startswith(f"## [{version}]"):
+                      capture = True
+                      continue
+              if capture:
+                  out.append(line)
+          open("release_notes.md", "w", encoding="utf-8").write("\n".join(out).strip() + "\n")
+          PY
+
+      - name: Build source archive
+        run: |
+          mkdir -p dist
+          git archive --format=zip -o dist/secret-scanner.nvim-${{ github.ref_name }}.zip "${{ github.ref_name }}"
+
+      - name: Create release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release create "${{ github.ref_name }}" \
+            --title "secret-scanner.nvim ${{ github.ref_name }}" \
+            --notes-file release_notes.md \
+            dist/*
+
+      - name: Share release URL
+        run: |
+          echo "release=${{ github.server_url }}/${{ github.repository }}/releases/tag/${{ github.ref_name }}" >> "$GITHUB_STEP_SUMMARY"

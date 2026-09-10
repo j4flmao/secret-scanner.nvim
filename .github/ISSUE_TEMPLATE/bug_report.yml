@@ -1,0 +1,88 @@
+name: Bug report
+description: Something isn't working as expected
+title: "[Bug]: "
+labels: [bug, triage]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting. A **minimal repro** (a tiny file/config that
+        triggers the wrong behavior, or a fixture repo) makes this instantly
+        actionable — see `CONTRIBUTING.md` for the shape we like.
+
+  - type: input
+    id: nvim_version
+    attributes:
+      label: Neovim version
+      description: First line of `nvim --version`
+      placeholder: "0.10.4 / 0.11.0-dev"
+    validations:
+      required: true
+
+  - type: input
+    id: gitleaks_version
+    attributes:
+      label: gitleaks version
+      description: Output of `gitleaks version`
+      placeholder: "8.24.0"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: os
+    attributes:
+      label: Operating system
+      options:
+        - Linux
+        - macOS
+        - Windows
+      description: Which OS are you on?
+    validations:
+      required: true
+
+  - type: textarea
+    id: what_happened
+    attributes:
+      label: What happened?
+      description: Also tell us what you expected to happen.
+      placeholder: Tell us what you expected vs what actually happened.
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: Include your setup() call, the file content, and any relevant commands.
+      placeholder: |
+        1. Open `foo.lua` containing ...
+        2. Press ...
+        3. Run :SecretScannerScanRepo
+      value: |
+        1.
+        2.
+        3.
+    validations:
+      required: true
+
+  - type: textarea
+    id: config
+    attributes:
+      label: Config
+      render: lua
+      description: Your `require("secret-scanner").setup({ ... })` block
+    validations:
+      required: false
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Error output / diagnostics
+      render: shell
+      description: Any notification text, gitleaks stderr, or :checkhealth output.
+      value: |
+        ```text
+        paste output here
+        ```
+    validations:
+      required: false

@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Discussion / questions
+    url: https://github.com/j4flmao/secret-scanner.nvim/discussions
+    about: Ask questions and share setups here
+  - name: Security issues
+    url: https://github.com/j4flmao/secret-scanner.nvim/security/advisories/new
+    about: Report a vulnerability privately — please don't open a public issue for secrets/security bugs

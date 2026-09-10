@@ -1,0 +1,17 @@
+[
+  {
+    "Description": "AWS Access Key",
+    "EndColumn": 42,
+    "EndLine": 12,
+    "File": "config.py",
+    "RuleID": "aws-access-key",
+    "Secret": "AKIAIOSFODNN7EXAMPLE",
+    "Severity": "high",
+    "StartColumn": 21,
+    "StartLine": 12
+  },
+  {
+    "Description": "Partial entry",
+    "File": "partial.txt"
+  }
+]

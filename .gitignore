@@ -1,0 +1,22 @@
+# Dependencies
+deps/
+node_modules/
+
+# Neovim
+*.swp
+*.swo
+*~
+tags
+
+# Test artifacts
+tests/plenary.nvim/
+*.o
+*.so
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/

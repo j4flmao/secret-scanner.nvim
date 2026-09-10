@@ -1,0 +1,35 @@
+[
+  {
+    "Description": "AWS Access Key",
+    "EndColumn": 42,
+    "EndLine": 12,
+    "File": "config.py",
+    "RuleID": "aws-access-key",
+    "Secret": "AKIAIOSFODNN7EXAMPLE",
+    "Severity": "high",
+    "StartColumn": 21,
+    "StartLine": 12
+  },
+  {
+    "Description": "GitHub Personal Access Token",
+    "EndColumn": 60,
+    "EndLine": 8,
+    "File": ".env",
+    "RuleID": "github-pat",
+    "Secret": "ghp_ABCDEFGHIJKLMNOPQRSTUVWXYZabcdef123456",
+    "Severity": "high",
+    "StartColumn": 11,
+    "StartLine": 8
+  },
+  {
+    "Description": "Private Key",
+    "EndColumn": 1,
+    "EndLine": 3,
+    "File": "server.pem",
+    "RuleID": "private-key",
+    "Secret": "-----BEGIN RSA PRIVATE KEY-----",
+    "Severity": "critical",
+    "StartColumn": 1,
+    "StartLine": 1
+  }
+]

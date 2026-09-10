@@ -1,0 +1,20 @@
+# Extends gitleaks' embedded defaults so generic detections stay current
+# while the team-specific rule below is added on top.
+[extend]
+useDefault = true
+
+# Nimbus internal credentials — a format gitleaks doesn't know about yet.
+# Live keys are `nimbus__sk_live_` + 32+ chars.
+[[rules]]
+id = "nimbus-service-token"
+description = "Nimbus internal service token (live skeleton)"
+regex = '''nimbus__sk_live_[a-zA-Z0-9]{32,}'''
+entropy = 3.5
+tags = ["nimbus", "internal"]
+keywords = ["nimbus__sk_live"]
+
+# Demo/docs values that match the shape above are not real tokens.
+[[allowlists]]
+description = "Nimbus demo keys in docs and examples"
+regexes = ['''nimbus__sk_live_example''']
+paths = ['''(?i)\.(?:md|txt)(?:$|\.)''']

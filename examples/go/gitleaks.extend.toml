@@ -1,0 +1,19 @@
+# Extends gitleaks' embedded defaults so generic detections stay current
+# while the team-specific rule below is added on top.
+[extend]
+useDefault = true
+
+# ACME Corp internal credential — a format gitleaks doesn't know about yet.
+[[rules]]
+id = "acmecorp-internal-token"
+description = "ACME Corp internal API token"
+regex = '''acmecorp_internal_[a-z0-9]{40}'''
+entropy = 3.0
+tags = ["acmecorp", "internal"]
+keywords = ["acmecorp_internal"]
+
+# Mock keys reused across tests under internal/ — not real credentials.
+[[allowlists]]
+description = "ACME Corp mock/internal test keys"
+regexes = ['''acmecorp_internal_[a-z0-9]{40}''']
+paths = ['''(^|/)internal/(?:test|mocks?)/''']
